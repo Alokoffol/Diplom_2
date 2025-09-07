@@ -6,7 +6,6 @@ import stellarburgers.api.client.OrderClient;
 import stellarburgers.api.models.Order;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -52,15 +51,11 @@ public class OrderSteps {
         assertEquals("Неверный статус код при создании заказа с неверным хешем", 500, response.statusCode());
     }
 
-    // УБРАТЬ @Step отсюда!
     public List<String> getValidIngredients() {
         Response response = orderClient.getIngredients();
         assertEquals("Неверный статус код при получении ингредиентов", 200, response.statusCode());
 
-        List<Map<String, Object>> ingredients = response.jsonPath().getList("data");
-        return ingredients.stream()
-                .map(ingredient -> (String) ingredient.get("_id"))
-                .limit(2)
-                .collect(java.util.stream.Collectors.toList());
+        // Получаем сразу список ID ингредиентов без создания объектов
+        return response.jsonPath().getList("data._id");
     }
 }
