@@ -1,32 +1,34 @@
 ## Структура проекта
 
+```
 src/
 ├── main/
-│ ├── java/org/example/Main.java
-│ └── resources/simplelogger.properties
+│   ├── java/org/example/Main.java
+│   └── resources/simplelogger.properties
 └── test/
-└── java/stellarburgers/
-├── api/
-│ ├── client/
-│ │ ├── OrderClient.java
-│ │ └── UserClient.java
-│ ├── endpoints/
-│ │ └── Endpoints.java
-│ └── models/
-│ ├── ingredient/
-│ ├── LoginResponse.java
-│ ├── Order.java
-│ ├── OrderResponse.java
-│ └── User.java
-├── steps/
-│ ├── OrderSteps.java
-│ └── UserSteps.java
-├── tests/
-│ ├── CreateOrderTest.java
-│ ├── CreateUserTest.java
-│ └── LoginUserTest.java
-└── utils/
-└── DataGenerator.java
+    └── java/stellarburgers/
+        ├── api/
+        │   ├── client/
+        │   │   ├── OrderClient.java
+        │   │   └── UserClient.java
+        │   ├── endpoints/
+        │   │   └── Endpoints.java
+        │   └── models/
+        │       ├── ingredient/
+        │       ├── LoginResponse.java
+        │       ├── Order.java
+        │       ├── OrderResponse.java
+        │       └── User.java
+        ├── steps/
+        │   ├── OrderSteps.java
+        │   └── UserSteps.java
+        ├── tests/
+        │   ├── CreateOrderTest.java
+        │   ├── CreateUserTest.java
+        │   └── LoginUserTest.java
+        └── utils/
+            └── DataGenerator.java
+```
 
 
 ## Технологии
