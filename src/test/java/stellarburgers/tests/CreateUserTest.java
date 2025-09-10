@@ -1,5 +1,6 @@
 package stellarburgers.tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
@@ -31,6 +32,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание уникального пользователя")
+    @Description("Проверка успешного создания уникального пользователя")
     public void createUniqueUserTest() {
         accessToken = userSteps.createUniqueUser(testUser);
         assertNotNull("Access token не должен быть null", accessToken);
@@ -38,6 +40,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя, который уже зарегистрирован")
+    @Description("Проверка создания пользователя, который уже зарегистрирован")
     public void createExistingUserTest() {
         // Сначала создаем пользователя
         accessToken = userSteps.createUniqueUser(testUser);
@@ -49,6 +52,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без email")
+    @Description("Проверка попытки создания пользователя без указания email")
     public void createUserWithoutEmailTest() {
         User userWithoutEmail = DataGenerator.getUserWithoutEmail();
         userSteps.tryCreateUserWithoutRequiredField(userWithoutEmail);
@@ -56,6 +60,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без пароля")
+    @Description("Проверка попытки создания пользователя без указания пароля")
     public void createUserWithoutPasswordTest() {
         User userWithoutPassword = DataGenerator.getUserWithoutPassword();
         userSteps.tryCreateUserWithoutRequiredField(userWithoutPassword);
@@ -63,6 +68,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без имени")
+    @Description("Проверка попытки создания пользователя без указания имени")
     public void createUserWithoutNameTest() {
         User userWithoutName = DataGenerator.getUserWithoutName();
         userSteps.tryCreateUserWithoutRequiredField(userWithoutName);

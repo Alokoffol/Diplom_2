@@ -1,5 +1,6 @@
 package stellarburgers.tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
@@ -35,6 +36,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Вход под существующим пользователем")
+    @Description("Проверка успешного входа под существующим пользователем")
     public void loginWithExistingUserTest() {
         String loginToken = userSteps.loginUserSuccessfully(testUser);
         assertNotNull("Access token при логине не должен быть null", loginToken);
@@ -42,6 +44,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Вход с неверным email")
+    @Description("Проверка попытки входа с неверным email")
     public void loginWithWrongEmailTest() {
         User wrongEmailUser = new User(
                 "wrong_email@test.com",
@@ -53,6 +56,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Вход с неверным паролем")
+    @Description("Проверка попытки входа с неверным паролем")
     public void loginWithWrongPasswordTest() {
         User wrongPasswordUser = new User(
                 testUser.getEmail(),

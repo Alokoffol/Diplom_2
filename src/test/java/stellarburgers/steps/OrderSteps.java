@@ -7,6 +7,7 @@ import stellarburgers.api.models.Order;
 
 import java.util.List;
 
+import static org.apache.http.HttpStatus.*;
 import static org.junit.Assert.*;
 
 public class OrderSteps {
@@ -15,7 +16,8 @@ public class OrderSteps {
     @Step("Создание заказа с авторизацией")
     public void createOrderWithAuth(Order order, String accessToken) {
         Response response = orderClient.createOrder(order, accessToken);
-        assertEquals("Неверный статус код при создании заказа с авторизацией", 200, response.statusCode());
+        assertEquals("Неверный статус код при создании заказа с авторизацией",
+                SC_OK, response.statusCode());
 
         assertTrue("Заказ не создан успешно", response.jsonPath().getBoolean("success"));
         assertNotNull("Номер заказа не должен быть null", response.jsonPath().getInt("order.number"));
@@ -24,7 +26,8 @@ public class OrderSteps {
     @Step("Создание заказа без авторизации")
     public void createOrderWithoutAuth(Order order) {
         Response response = orderClient.createOrder(order, null);
-        assertEquals("Неверный статус код при создании заказа без авторизации", 200, response.statusCode());
+        assertEquals("Неверный статус код при создании заказа без авторизации",
+                SC_OK, response.statusCode());
 
         assertTrue("Заказ не создан успешно", response.jsonPath().getBoolean("success"));
         assertNotNull("Номер заказа не должен быть null", response.jsonPath().getInt("order.number"));
@@ -36,7 +39,8 @@ public class OrderSteps {
         emptyOrder.setIngredients(null);
 
         Response response = orderClient.createOrder(emptyOrder, accessToken);
-        assertEquals("Неверный статус код при создании заказа без ингредиентов", 400, response.statusCode());
+        assertEquals("Неверный статус код при создании заказа без ингредиентов",
+                SC_BAD_REQUEST, response.statusCode());
 
         assertFalse("Заказ не должен быть создан успешно", response.jsonPath().getBoolean("success"));
         assertEquals("Неверное сообщение об ошибке", "Ingredient ids must be provided", response.jsonPath().getString("message"));
@@ -48,14 +52,15 @@ public class OrderSteps {
         invalidOrder.setIngredients(java.util.Arrays.asList("invalid_hash_1", "invalid_hash_2"));
 
         Response response = orderClient.createOrder(invalidOrder, accessToken);
-        assertEquals("Неверный статус код при создании заказа с неверным хешем", 500, response.statusCode());
+        assertEquals("Неверный статус код при создании заказа с неверным хешем",
+                SC_INTERNAL_SERVER_ERROR, response.statusCode());
     }
 
     public List<String> getValidIngredients() {
         Response response = orderClient.getIngredients();
-        assertEquals("Неверный статус код при получении ингредиентов", 200, response.statusCode());
+        assertEquals("Неверный статус код при получении ингредиентов",
+                SC_OK, response.statusCode());
 
-        // Получаем сразу список ID ингредиентов без создания объектов
         return response.jsonPath().getList("data._id");
     }
 }
